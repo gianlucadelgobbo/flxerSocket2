@@ -23,7 +23,7 @@ block content
                 - date2.setDate(date2.getDate() + 1);
                 if date2.getTime() > date.getTime()
                   .form-check
-                    input.form-check-input.adminstatus(id=d._id type="checkbox" checked=(d.status ? "" : undefined))
+                    input.form-check-input.adminstatus(id=d._id type="checkbox" checked=(d.status ? "" : undefined) data-buy_id=d.buy_id)
                     label.form-check-label(for=d._id)=" BUYED"
                 else 
                   !="EXPIRED"

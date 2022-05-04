@@ -120,7 +120,7 @@ wss.on('connection', (ws) => {
         [...clients.keys()].forEach((client) => {
           client.send(JSON.stringify({status: message.status, buy_id: message.buy_id}));
         });
-        Data.findOne({_id:message.buy_id}).exec((err, data) => {
+        Data.findOne({_id:message.id}).exec((err, data) => {
           data.status = message.status;
           data.save();
         });        

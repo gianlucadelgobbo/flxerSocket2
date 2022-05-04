@@ -46,11 +46,12 @@ $( window ).resize(function() {
     });
 
     $(".adminstatus").click(function (){
-      var buy_id = $(this).attr("id");
+      var id = $(this).attr("id");
+      var buy_id = $(this).data("buy_id");
       var status = $(this).is(':checked');
       console.log({ action: "UPDATEDATA", buy_id: buy_id, status: status })
-      if (buy_id) {
-        const messageBody = { action: "UPDATEDATA", buy_id: buy_id, status: status };
+      if (buy_id && id) {
+        const messageBody = { action: "UPDATEDATA", buy_id: buy_id, id: id, status: status };
         ws.send(JSON.stringify(messageBody));
       } else {
         alert ("error");

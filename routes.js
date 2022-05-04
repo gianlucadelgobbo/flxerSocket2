@@ -52,7 +52,7 @@ router.get('/data', function(req, res) {
     });
   });
 });
- */
+
 router.get('/register', function(req, res) {
   res.render('register', {});
 });
@@ -70,7 +70,7 @@ router.post('/register', function(req, res, next) {
     res.redirect('/data');
   });
 });
-
+ */
 router.get('/login', function(req, res) {
   res.render('login', {user: req.user, message: req.flash('error')});
 });

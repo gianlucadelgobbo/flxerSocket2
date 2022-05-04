@@ -58,7 +58,7 @@ $( window ).resize(function() {
   })
 
     async function connectToServer() {    
-        const ws = new WebSocket('ws://localhost:7071/ws');
+        const ws = new WebSocket('ws://ted.avnode.net:7071/ws');
         return new Promise((resolve, reject) => {
             const timer = setInterval(() => {
                 if(ws.readyState === 1) {

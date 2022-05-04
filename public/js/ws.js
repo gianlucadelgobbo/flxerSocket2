@@ -58,7 +58,7 @@ $( window ).resize(function() {
   })
 
     async function connectToServer() {    
-        const ws = new WebSocket('ws://ted.avnode.net:8080/ws');
+        const ws = new WebSocket('wss://ted.avnode.net:8080/wss');
         return new Promise((resolve, reject) => {
             const timer = setInterval(() => {
                 if(ws.readyState === 1) {

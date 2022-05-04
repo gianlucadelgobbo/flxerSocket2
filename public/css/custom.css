@@ -1,0 +1,55 @@
+.buttonfull,.prenotato, .comprato {
+  height: 100%;
+  width: 100%;
+  text-align: right;
+  font-size: 12px;
+  padding: 5px;
+  text-decoration: none;
+  color: black;
+}
+.shape td {
+  background-color: rgba(0,0,0,0);
+  /*border: 1px solid #FFF;*/
+  height: 41.5px;
+  width: 53.7px;
+}
+.buttonfull,.prenotato, .comprato {
+  display: block;
+}
+
+.buttonfull span{
+  margin: auto;
+}
+
+.buttonfull {
+  background-color: rgba(30,30,30,0.4);
+}
+
+.prenotato {
+  background-color:yellow;
+}
+
+.comprato {
+  background-color:blue;
+  color: #FFF;
+}
+
+.shape{
+  margin: auto;
+  width: max-content;
+  /*background-image: url("/img/flat2.jpg");*/
+  background-position: -117px -106px;
+  background-repeat: no-repeat;
+}
+.mycontainer {
+  width: 100%;
+  height: 100vh;
+  overflow: scroll;
+}
+
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-nav {
+    position: absolute;
+    right: 0;
+  }
+}

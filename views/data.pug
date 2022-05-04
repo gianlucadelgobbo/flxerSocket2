@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  .container
+    if (user)
+      h1.mt-3.mb-4 You are currently logged in as #{user}
+      table.table
+        thead
+          tr
+            th NFT 
+            th Email 
+            th Status 
+            th Booking time
+        tbody
+          each d in data
+            tr
+              td=d.buy_id 
+              td
+                a(href="mailto:"+d.email)=d.email 
+              td
+                - var date = new Date();
+                - var date2 = new Date(d.createdAt);
+                - date2.setDate(date2.getDate() + 1);
+                if date2.getTime() > date.getTime()
+                  .form-check
+                    input.form-check-input.adminstatus(id=d._id type="checkbox" checked=(d.status ? "" : undefined))
+                    label.form-check-label(for=d._id)=" BUYED"
+                else 
+                  !="EXPIRED"
+              td=d.createdAt
+    else
+      p You are currently not logged in. Plaese login or register...

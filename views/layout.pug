@@ -1,0 +1,55 @@
+doctype html
+html(lang='en')
+  head
+    title Arturo Tedeschi
+    // Required meta tags
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    // Bootstrap CSS
+    link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3' crossorigin='anonymous')
+
+    link(rel='stylesheet', href='/css/custom.css')
+
+  body
+    nav.navbar.navbar-dark.bg-dark.navbar-expand-lg.sticky-top
+      .container-fluid
+        a.navbar-brand Arturo Tedeschi
+        button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown' aria-controls='navbarNavDropdown' aria-expanded='false' aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        #navbarNavDropdown.collapse.navbar-collapse
+          ul.navbar-nav
+            li.nav-item
+              a.nav-link.active(aria-current='page' href='/') Home
+            if (typeof(user) == 'undefined')
+              li.nav-item
+                a.nav-link(href="/#") About
+              li.nav-item
+                a.nav-link(href="/login") Log In
+            else
+              li.nav-item
+                a.nav-link(href="/logout") Log Out
+              li.nav-item
+                a.nav-link(href="/data") DATA
+
+    block content
+    #buyModal.modal.fade(tabindex='-1' aria-labelledby='buyModalLabel' aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            h5#buyModalLabel.modal-title New message
+            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+          .modal-body
+            form
+              .mb-3
+                !="NFT: "
+                span#nft=""
+              .mb-3
+                label.col-form-label(for='message-text') Email:
+                input#email.form-control(type='text')
+          .modal-footer
+            button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Close
+            button.btn.btn-primary#book(type='button') BOOK
+
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p' crossorigin='anonymous')
+    script(src='/js/jquery.min.js')
+    script(src='/js/ws.js')

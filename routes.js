@@ -15,10 +15,6 @@ router.get('/', function(req, res) {
   });
 });
 
-router.get('/register', function(req, res) {
-  res.render('register', {});
-});
-
 router.get('/data', function(req, res) {
   if (req.query.json) {
     var date = new Date();
@@ -56,6 +52,10 @@ router.get('/data', function(req, res) {
     });
   });
 });
+ */
+router.get('/register', function(req, res) {
+  res.render('register', {});
+});
 
 router.post('/register', function(req, res, next) {
   console.log('registering user');
@@ -67,10 +67,10 @@ router.post('/register', function(req, res, next) {
 
     console.log('user registered!');
 
-    res.redirect('/');
+    res.redirect('/data');
   });
 });
- */
+
 router.get('/login', function(req, res) {
   res.render('login', {user: req.user, message: req.flash('error')});
 });

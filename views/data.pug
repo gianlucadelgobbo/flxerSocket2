@@ -7,13 +7,17 @@ block content
       table.table
         thead
           tr
+            th Act 
             th NFT 
             th Email 
             th Status 
             th Booking time
         tbody
           each d in data
-            tr
+            tr(id=d._id)
+              td
+                button.btn.btn-danger.admindelete(type='button' data-id=d._id data-buy_id=d.buy_id)
+                  span.btn-close
               td=d.buy_id 
               td
                 a(href="mailto:"+d.email)=d.email 
@@ -23,7 +27,7 @@ block content
                 - date2.setDate(date2.getDate() + 1);
                 if date2.getTime() > date.getTime()
                   .form-check
-                    input.form-check-input.adminstatus(id=d._id type="checkbox" checked=(d.status ? "" : undefined) data-buy_id=d.buy_id)
+                    input.form-check-input.adminstatus(data-id=d._id type="checkbox" checked=(d.status ? "" : undefined) data-buy_id=d.buy_id)
                     label.form-check-label(for=d._id)=" BUYED"
                 else 
                   !="EXPIRED"

@@ -4,7 +4,9 @@ const Data = require('./models/data');
 const router = require('express').Router();
 
 router.get('/', function(req, res) {
-  Data.find().exec((err, data) => {
+  var date = new Date();
+  date.setDate(date.getDate() - 1);
+  Data.find({createdAt:{"$gte": date}}).exec((err, data) => {
     console.log("data");
     console.log(data);
     var send = {}
@@ -27,7 +29,7 @@ router.get('/data', function(req, res) {
       //res.render('data', {"data":data, user: req.session.passport.user});
     });
   } else if (req.session.passport && req.session.passport.user) {
-    Data.find().exec((err, data) => {
+    Data.find().sort([['createdAt', -1]]).exec((err, data) => {
       res.render('data', {"data":data, user: req.session.passport.user});
     });
   } else {
@@ -123,6 +125,13 @@ wss.on('connection', (ws) => {
         Data.findOne({_id:message.id}).exec((err, data) => {
           data.status = message.status;
           data.save();
+        });        
+      } else if (message.action == 'DELETEDATA') {
+        [...clients.keys()].forEach((client) => {
+          client.send(JSON.stringify({buy_id: message.buy_id}));
+        });
+        console.log(message.action)
+        Data.deleteOne({_id:message.id}).exec((err) => {
         });        
       }
   

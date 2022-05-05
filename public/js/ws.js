@@ -25,7 +25,11 @@ $( window ).resize(function() {
       console.log("onmessage")
       const messageBody = JSON.parse(webSocketMessage.data);
       console.log(messageBody)
-      $("#nft"+messageBody.buy_id).html('<div class="'+(messageBody.status===true ? "comprato" : "prenotato")+'">'+messageBody.buy_id+'</div>');
+      if (messageBody.buy_id !== false && messageBody.buy_id!==true) {
+        $("#nft"+messageBody.buy_id).html('<a class="buttonfull" href="#" data-id="'+messageBody.buy_id+'">'+messageBody.buy_id+'</a>');
+      } else {
+        $("#nft"+messageBody.buy_id).html('<div class="'+(messageBody.status===true ? "comprato" : "prenotato")+'">'+messageBody.buy_id+'</div>');
+      }
       buyModal.hide()
     };        
     
@@ -46,7 +50,7 @@ $( window ).resize(function() {
     });
 
     $(".adminstatus").click(function (){
-      var id = $(this).attr("id");
+      var id = $(this).data("id");
       var buy_id = $(this).data("buy_id");
       var status = $(this).is(':checked');
       console.log({ action: "UPDATEDATA", buy_id: buy_id, status: status })
@@ -56,10 +60,23 @@ $( window ).resize(function() {
       } else {
         alert ("error");
       }
-  })
+    })
+
+    $(".admindelete").click(function (){
+      var id = $(this).data("id");
+      var buy_id = $(this).data("buy_id");
+      if (id) {
+        const messageBody = { action: "DELETEDATA", buy_id: buy_id, id: id };
+        ws.send(JSON.stringify(messageBody));
+        $("#"+id).remove()
+      } else {
+        alert ("error");
+      }
+    })
 
     async function connectToServer() {    
-        const ws = new WebSocket('ws://176.9.142.221:8080/ws');
+      //const ws = new WebSocket('ws://176.9.142.221:8080/ws');
+      const ws = new WebSocket('ws://localhost:8080/ws');
         return new Promise((resolve, reject) => {
             const timer = setInterval(() => {
                 if(ws.readyState === 1) {

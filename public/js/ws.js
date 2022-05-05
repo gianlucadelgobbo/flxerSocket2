@@ -75,7 +75,7 @@ $( window ).resize(function() {
     })
     async function connectToServer() {    
       if (wsdomain) {
-        const wss = new WebSocket('wss://'+wsdomain+':8060/ws');
+        const ws = new WebSocket('wss://'+wsdomain+':8060/ws');
         return new Promise((resolve, reject) => {
           const timer = setInterval(() => {
             if(ws.readyState === 1) {

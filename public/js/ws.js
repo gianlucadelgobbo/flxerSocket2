@@ -25,7 +25,7 @@ $( window ).resize(function() {
       console.log("onmessage")
       const messageBody = JSON.parse(webSocketMessage.data);
       console.log(messageBody)
-      if (messageBody.buy_id !== false && messageBody.buy_id!==true) {
+      if (messageBody.status !== false && messageBody.status!==true) {
         $("#nft"+messageBody.buy_id).html('<a class="buttonfull" href="#" data-id="'+messageBody.buy_id+'">'+messageBody.buy_id+'</a>');
       } else {
         $("#nft"+messageBody.buy_id).html('<div class="'+(messageBody.status===true ? "comprato" : "prenotato")+'">'+messageBody.buy_id+'</div>');
@@ -73,20 +73,19 @@ $( window ).resize(function() {
         alert ("error");
       }
     })
-
     async function connectToServer() {    
-      //const ws = new WebSocket('ws://176.9.142.221:8080/ws');
-      const ws = new WebSocket('ws://localhost:8080/ws');
+      if (wsdomain) {
+        const ws = new WebSocket('ws://'+wsdomain+':8080/ws');
         return new Promise((resolve, reject) => {
-            const timer = setInterval(() => {
-                if(ws.readyState === 1) {
-                    clearInterval(timer);
-                    resolve(ws);
-                }
-            }, 10);
+          const timer = setInterval(() => {
+            if(ws.readyState === 1) {
+              clearInterval(timer);
+              resolve(ws);
+            }
+          }, 10);
         });   
+      }
     }
-
 /*     if (document.getElementById("buttonget")) {
       document.getElementById("buttonget").onclick = (evt) => {
           const messageBody = { action: "GETDATA" };

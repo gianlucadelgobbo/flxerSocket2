@@ -2,18 +2,19 @@ const passport = require('passport');
 const Account = require('./models/account');
 const Data = require('./models/data');
 const router = require('express').Router();
+const config = require('config');
 
 router.get('/', function(req, res) {
   var date = new Date();
   date.setDate(date.getDate() - 1);
   Data.find({createdAt:{"$gte": date}}).exec((err, data) => {
     console.log("data");
-    console.log(data);
+    console.log(config.env);
     var send = {}
     data.forEach(item => {
       send[item.buy_id] = item.status;
     })
-    res.render('index', {"data":send, user: req.session.passport ? req.session.passport.user : undefined});
+    res.render('index', {"data":send, user: req.session.passport ? req.session.passport.user : undefined, wsdomain: config[config.env].wsdomain});
   });
 });
 
@@ -30,7 +31,7 @@ router.get('/data', function(req, res) {
     });
   } else if (req.session.passport && req.session.passport.user) {
     Data.find().sort([['createdAt', -1]]).exec((err, data) => {
-      res.render('data', {"data":data, user: req.session.passport.user});
+      res.render('data', {"data":data, user: req.session.passport.user, wsdomain: config[config.env].wsdomain});
     });
   } else {
     res.redirect('/');

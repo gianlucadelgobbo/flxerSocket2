@@ -34,6 +34,8 @@ app.use(passport.session());
 
 // Configure passport-local to use account model for authentication
 const Account = require('./models/account');
+//const { config } = require('process');
+const config = require('config');
 passport.use(new LocalStrategy(Account.authenticate()));
 
 passport.serializeUser(Account.serializeUser());
@@ -61,7 +63,6 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-console.log(app.get('env'))
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
@@ -71,6 +72,7 @@ if (app.get('env') === 'development') {
     });
   });
 }
+config.env = app.get('env');
 
 // production error handler
 // no stacktraces leaked to user

@@ -1,0 +1,9 @@
+{
+  "development": {
+    "wsdomain": "localhost"
+  },
+  "production": {
+    "wsdomain": "176.9.142.221"
+  }
+
+}

@@ -36,6 +36,13 @@ function myOnresize() {
       if (!is_admin) {
         if (messageBody.status !== false && messageBody.status!==true) {
           $("#nft"+messageBody.buy_id).html('<a class="buttonfull" href="#" data-id="'+messageBody.buy_id+'">'+messageBody.buy_id+'</a>');
+          $(".buttonfull").click(function(e){
+            e.preventDefault()
+            $("#nft").html($(this).data("id"))
+            $("#email").val("");
+            $("#buyModal .alert").addClass("d-none").html("")
+            buyModal.show()
+          });
         } else {
           $("#nft"+messageBody.buy_id).html('<div class="'+(messageBody.status===true ? "comprato" : "prenotato")+'">'+messageBody.buy_id+'</div>');
           if (messageBody.status === false) {
@@ -51,14 +58,16 @@ function myOnresize() {
       } 
     };        
     
-    $(".buttonfull").click(function(){
+    $(".buttonfull").click(function(e){
+      e.preventDefault()
       $("#nft").html($(this).data("id"))
       $("#email").val("");
       $("#buyModal .alert").addClass("d-none").html("")
       buyModal.show()
     });
 
-    $(".adminstatus").click(function (){
+    $(".adminstatus").click(function(e){
+      e.preventDefault()
       var id = $(this).data("id");
       var buy_id = $(this).data("buy_id");
       var status = $(this).is(':checked');
@@ -71,7 +80,8 @@ function myOnresize() {
       }
     })
 
-    $(".admindelete").click(function (){
+    $(".admindelete").click(function(e){
+      e.preventDefault()
       var id = $(this).data("id");
       var buy_id = $(this).data("buy_id");
       if (id) {
@@ -84,7 +94,8 @@ function myOnresize() {
     });
 
     if (document.getElementById("book")) {
-      document.getElementById("book").onclick = (evt) => {
+      document.getElementById("book").onclick = (e) => {
+        e.preventDefault()
         $("#buyModal .alert").addClass("d-none").html("")
         const messageBody = { action: "SETDATA", buy_id: $("#nft").html(), email: $("#email").val() };
         console.log("messageBody")

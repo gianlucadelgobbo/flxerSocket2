@@ -128,6 +128,11 @@ wss.on('connection', (ws) => {
       console.log(message.action)
       Data.deleteOne({buy_id:message.buy_id}).exec((err) => {
       });        
+    } else if (message.action == 'EXPIREDATA') {
+      [...clients.keys()].forEach((client) => {
+        client.send(JSON.stringify({buy_id: message.buy_id}));
+      });
+      console.log(message.action)
     }
 
     /*  const message = JSON.parse(messageAsString);

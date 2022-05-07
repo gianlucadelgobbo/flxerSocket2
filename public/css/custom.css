@@ -44,9 +44,9 @@
   background-size: contain;
 }
 .mycontainer {
-  width: 100%;
+  /* width: 100%;
   height: 100vh;
-  overflow: scroll;
+  overflow: scroll; */
   padding: 100px;
   background-image: url("/img/bkg.png");
   background-position: -1px 3px;

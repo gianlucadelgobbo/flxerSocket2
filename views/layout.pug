@@ -10,8 +10,12 @@ html(lang='en')
 
     link(rel='stylesheet', href='/css/custom.css')
     if wsdomain
+      - var dd = JSON.stringify(full)
       script. 
-        var wsdomain = "!{wsdomain}"
+        var wsdomain = "!{wsdomain}";
+        var delay = !{config.delay};
+        var data = !{dd}
+
   body
     nav.navbar.navbar-dark.bg-dark.navbar-expand-lg.sticky-top
       .container-fluid
@@ -41,6 +45,7 @@ html(lang='en')
             h5#buyModalLabel.modal-title New message
             button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
           .modal-body
+            .alert.alert-danger.d-none
             form
               .mb-3
                 !="NFT: "

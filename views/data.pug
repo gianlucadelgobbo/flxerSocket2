@@ -1,6 +1,8 @@
 extends layout
 
 block content
+  script. 
+    var is_admin = true
   .container
     if (user)
       h1.mt-3.mb-4 You are currently logged in as #{user}
@@ -24,7 +26,7 @@ block content
               td
                 - var date = new Date();
                 - var date2 = new Date(d.createdAt);
-                - date2.setDate(date2.getDate() + 1);
+                - date2.setTime(date2.getTime() + (config.delay * 60 * 1000));
                 if date2.getTime() > date.getTime()
                   .form-check
                     input.form-check-input.adminstatus(data-id=d._id type="checkbox" checked=(d.status ? "" : undefined) data-buy_id=d.buy_id)

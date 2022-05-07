@@ -21,30 +21,36 @@
   margin: auto;
 }
 
-.buttonfull {
+.buttonfull:hover {
   background-color: rgba(30,30,30,0.4);
+  color:#FFF
 }
 
 .prenotato {
-  background-color:yellow;
+  background-color:#FFF;
 }
 
 .comprato {
-  background-color:blue;
+  background-color:rgb(255, 0, 0);
   color: #FFF;
 }
 
 .shape{
   margin: auto;
   width: max-content;
-  /*background-image: url("/img/flat2.jpg");*/
-  background-position: -117px -106px;
+  background-image: url("/img/scultura.png");
+  background-position: -1px 3px;
   background-repeat: no-repeat;
+  background-size: contain;
 }
 .mycontainer {
   width: 100%;
   height: 100vh;
   overflow: scroll;
+  padding: 100px;
+  background-image: url("/img/bkg.png");
+  background-position: -1px 3px;
+  background-repeat:repeat-x;
 }
 
 @media (min-width: 992px) {

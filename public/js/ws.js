@@ -1,3 +1,5 @@
+//const data = require("../../models/data");
+
 /* $("td").click(function (){
   let buy_id = prompt("Please enter box number", "");
   let text;
@@ -8,11 +10,17 @@
     $(this).attr("id", "nft"+buy_id);
   }
 }) */
-$( window ).resize(function() {
+$(function() {
+  myOnresize();
+});
+$( window ).resize(function () {
+  myOnresize();
+});
+function myOnresize() {
+  console.log("myOnresize")
   $(".mycontainer").scrollTop(($( ".shape" ).height() - $( window ).height())/2)
   $(".mycontainer").scrollLeft(($( ".shape" ).width() - $( window ).width())/2)
-});
-
+}
 (async function() {
 
     const ws = await connectToServer();    
@@ -25,27 +33,28 @@ $( window ).resize(function() {
       console.log("onmessage")
       const messageBody = JSON.parse(webSocketMessage.data);
       console.log(messageBody)
-      if (messageBody.status !== false && messageBody.status!==true) {
-        $("#nft"+messageBody.buy_id).html('<a class="buttonfull" href="#" data-id="'+messageBody.buy_id+'">'+messageBody.buy_id+'</a>');
-      } else {
-        $("#nft"+messageBody.buy_id).html('<div class="'+(messageBody.status===true ? "comprato" : "prenotato")+'">'+messageBody.buy_id+'</div>');
-      }
-      buyModal.hide()
+      if (!is_admin) {
+        if (messageBody.status !== false && messageBody.status!==true) {
+          $("#nft"+messageBody.buy_id).html('<a class="buttonfull" href="#" data-id="'+messageBody.buy_id+'">'+messageBody.buy_id+'</a>');
+        } else {
+          $("#nft"+messageBody.buy_id).html('<div class="'+(messageBody.status===true ? "comprato" : "prenotato")+'">'+messageBody.buy_id+'</div>');
+          if (messageBody.status === false) {
+            var date = new Date();
+            console.log("createdAt")
+            console.log(date)
+        
+            setMyIntervan(messageBody.buy_id, delay * 60 * 1000);
+    
+          }
+        }
+        buyModal.hide()
+      } 
     };        
     
-    if (document.getElementById("book")) {
-      document.getElementById("book").onclick = (evt) => {
-        if ($("#nft").html() && $("#email").val()) {
-          const messageBody = { action: "SETDATA", buy_id: $("#nft").html(), email: $("#email").val() };
-          ws.send(JSON.stringify(messageBody));
-        } else {
-          alert ("error");
-        }
-      }
-    }
-
     $(".buttonfull").click(function(){
       $("#nft").html($(this).data("id"))
+      $("#email").val("");
+      $("#buyModal .alert").addClass("d-none").html("")
       buyModal.show()
     });
 
@@ -72,10 +81,72 @@ $( window ).resize(function() {
       } else {
         alert ("error");
       }
-    })
+    });
+
+    if (document.getElementById("book")) {
+      document.getElementById("book").onclick = (evt) => {
+        $("#buyModal .alert").addClass("d-none").html("")
+        const messageBody = { action: "SETDATA", buy_id: $("#nft").html(), email: $("#email").val() };
+        console.log("messageBody")
+        console.log(messageBody)
+        $.ajax({
+          url: "/",
+          method: "POST",
+          data: messageBody
+        })
+        .done(function(data) {
+          console.log("data")
+          console.log(data)
+          //ws.send(JSON.stringify(messageBody));
+        })
+        .fail(function(error) {
+          console.log( "error" );
+          $("#buyModal .alert").removeClass("d-none").html(error.responseJSON.message)
+          console.log(error)
+        });
+      }
+    }
+    if (!is_admin) {
+      var intervals = {};
+      class interval {
+        constructor(buy_id, ms) {
+          var i = setInterval(()=>{
+            const messageBody = { action: "EXPIREDATA", buy_id: buy_id };
+            console.log(messageBody);
+            ws.send(JSON.stringify(messageBody));
+            clearInterval(i)
+          }, ms);
+        }
+      }
+      function setMyIntervan(buy_id, ms) {
+        intervals[buy_id] = new interval(buy_id, ms)
+      }
+      console.log("datadatadatadatadatadata")
+      console.log(data)
+      for (var a = 0 ; a<data.length; a++) {
+        var date = new Date(data[a].createdAt);
+        console.log("createdAt")
+        console.log(date)
+        //
+  
+        date = new Date(date.setTime(date.getTime()+ (delay * 60 * 1000)))
+        console.log("spegni")
+        console.log(date)
+  
+        var now = new Date().getTime()
+        var spegni = date.getTime()-now
+        console.log("spegnispegni")
+        console.log(spegni)
+  
+        setMyIntervan(data[a].buy_id, spegni);
+        console.log(spegni)
+      }
+  
+    }
     async function connectToServer() {    
       if (wsdomain) {
-        const ws = new WebSocket('wss://'+wsdomain+':8060/ws');
+        console.log(''+wsdomain+'/ws')
+        const ws = new WebSocket(''+wsdomain+'/ws');
         return new Promise((resolve, reject) => {
           const timer = setInterval(() => {
             if(ws.readyState === 1) {

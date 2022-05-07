@@ -1,9 +1,9 @@
 {
   "development": {
-    "wsdomain": "localhost"
+    "wsdomain": "ws://localhost:8080"
   },
   "production": {
-    "wsdomain": "ted.avnode.net"
-  }
-
+    "wsdomain": "wss://ted.avnode.net:8060"
+  },
+  "delay": 2222
 }

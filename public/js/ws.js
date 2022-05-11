@@ -33,25 +33,26 @@ function myOnresize() {
       console.log("onmessage")
       const messageBody = JSON.parse(webSocketMessage.data);
       console.log(messageBody)
+      console.log("is_admin"+is_admin)
       if (!is_admin) {
         if (messageBody.status !== false && messageBody.status!==true) {
-          $("#nft"+messageBody.buy_id).html('<a class="buttonfull" href="#" data-id="'+messageBody.buy_id+'">'+messageBody.buy_id+'</a>');
-          $(".buttonfull").click(function(e){
-            e.preventDefault()
-            $("#nft").html($(this).data("id"))
-            $("#email").val("");
-            $("#buyModal .alert").addClass("d-none").html("")
-            buyModal.show()
-          });
+          if ( $("#nft"+messageBody.buy_id+" .prenotato").length) {
+            $("#nft"+messageBody.buy_id).html('<a class="buttonfull" href="#" data-id="'+messageBody.buy_id+'">'+messageBody.buy_id+'</a>');
+            $(".buttonfull").click(function(e){
+              e.preventDefault()
+              $("#nft").html($(this).data("id"))
+              $("#email").val("");
+              $("#buyModal .alert").addClass("d-none").html("")
+              buyModal.show()
+            });
+          } 
         } else {
           $("#nft"+messageBody.buy_id).html('<div class="'+(messageBody.status===true ? "comprato" : "prenotato")+'">'+messageBody.buy_id+'</div>');
           if (messageBody.status === false) {
             var date = new Date();
             console.log("createdAt")
             console.log(date)
-        
-            setMyIntervan(messageBody.buy_id, delay * 60 * 1000);
-    
+            setMyIntervan(messageBody.buy_id, delay * 60 * 1000);   
           }
         }
         buyModal.hide()
@@ -67,7 +68,7 @@ function myOnresize() {
     });
 
     $(".adminstatus").click(function(e){
-      e.preventDefault()
+      //e.preventDefault()
       var id = $(this).data("id");
       var buy_id = $(this).data("buy_id");
       var status = $(this).is(':checked');
@@ -135,22 +136,23 @@ function myOnresize() {
       console.log("datadatadatadatadatadata")
       console.log(data)
       for (var a = 0 ; a<data.length; a++) {
-        var date = new Date(data[a].createdAt);
-        console.log("createdAt")
-        console.log(date)
-        //
-  
-        date = new Date(date.setTime(date.getTime()+ (delay * 60 * 1000)))
-        console.log("spegni")
-        console.log(date)
-  
-        var now = new Date().getTime()
-        var spegni = date.getTime()-now
-        console.log("spegnispegni")
-        console.log(spegni)
-  
-        setMyIntervan(data[a].buy_id, spegni);
-        console.log(spegni)
+        if (!data[a].status) {
+          var date = new Date(data[a].createdAt);
+          console.log("createdAt")
+          console.log(date)
+          //
+          date = new Date(date.setTime(date.getTime()+ (delay * 60 * 1000)))
+          console.log("spegni")
+          console.log(date)
+    
+          var now = new Date().getTime()
+          var spegni = date.getTime()-now
+          console.log("spegnispegni")
+          console.log(spegni)
+    
+          setMyIntervan(data[a].buy_id, spegni);
+          console.log(spegni)
+        }
       }
   
     }

@@ -13,6 +13,7 @@ block content
             th NFT 
             th Email 
             th Status 
+            th Sells 
             th Booking time
         tbody
           each d in data
@@ -28,11 +29,15 @@ block content
                 - var date2 = new Date(d.createdAt);
                 - date2.setTime(date2.getTime() + (config.delay * 60 * 1000));
                 if date2.getTime() > date.getTime()
-                  .form-check
-                    input.form-check-input.adminstatus(data-id=d._id type="checkbox" checked=(d.status ? "" : undefined) data-buy_id=d.buy_id)
-                    label.form-check-label(for=d._id)=" BUYED"
-                else 
+                  !="BOOKED"
+                else if d.status
+                  !="SOLD"
+                else if !d.status
                   !="EXPIRED"
+              td
+                .form-check
+                  input.form-check-input.adminstatus(data-id=d._id type="checkbox" checked=(d.status ? "" : undefined) data-buy_id=d.buy_id)
+                  label.form-check-label(for=d._id)=" BUYED"
               td=d.createdAt
     else
       p You are currently not logged in. Plaese login or register...

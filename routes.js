@@ -7,7 +7,7 @@ const config = require('config');
 router.get('/', function(req, res) {
   var date = new Date();
   date.setTime(date.getTime() - (config.delay * 60 * 1000));
-  Data.find({createdAt:{"$gte": date}}).select("-_id -email -updatedAt -__v").exec((err, data) => {
+  Data.find({$or:[{createdAt:{"$gte": date}},{status: true}]}).select("-_id -email -updatedAt -__v").exec((err, data) => {
     console.log("data get");
     console.log(config.env);
     var send = {}
@@ -23,7 +23,7 @@ router.get('/data', function(req, res) {
     var date = new Date();
     date.setTime(date.getTime() - (config.delay * 60 * 1000));
 
-    Data.find({createdAt:{"$gte": date}}).select("-_id buy_id status").exec((err, data) => {
+    Data.find({$or:[{createdAt:{"$gte": date}},{status: true}]}).select("-_id buy_id status").exec((err, data) => {
       console.log("data");
       console.log(data);
       res.json(data);

@@ -18,8 +18,8 @@ $( window ).resize(function () {
 });
 function myOnresize() {
   console.log("myOnresize")
-  $("html,body").scrollTop(($( ".shape" ).height()+200 - $( window ).height())/2)
-  $("html,body").scrollLeft(($( ".shape" ).width()+200 - $( window ).width())/2)
+  $(".mycontainer").scrollTop(($( ".shape" ).height()+200 - $( window ).height())/2)
+  $(".mycontainer").scrollLeft(($( ".shape" ).width()+200 - $( window ).width())/2)
 }
 (async function() {
 

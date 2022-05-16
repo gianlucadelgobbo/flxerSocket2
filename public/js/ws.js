@@ -55,7 +55,7 @@ function myOnresize() {
             setMyIntervan(messageBody.buy_id, delay * 60 * 1000);   
           }
         }
-        buyModal.hide()
+        //buyModal.hide()
       } 
     };        
     
@@ -109,6 +109,7 @@ function myOnresize() {
         .done(function(data) {
           console.log("data")
           console.log(data)
+          buyModal.hide();
           //ws.send(JSON.stringify(messageBody));
         })
         .fail(function(error) {

@@ -15,7 +15,7 @@ const Data = new Schema({
     }, 'EMAIL_IS_NOT_VALID']
   },
   buy_id: Number,
-  status: Boolean
+  status: String
 }, {
   timestamps: true
 });

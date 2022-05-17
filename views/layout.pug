@@ -11,10 +11,14 @@ html(lang='en')
     link(rel='stylesheet', href='/css/custom.css')
     if wsdomain
       - var dd = JSON.stringify(full)
+      - var buyed = []
+      - for (var a=0;a<data.length;a++) if (data[a].status=="comprato") buyed.push(data[a].buy_id)
+      - var buyedbuyed = JSON.stringify(buyed)
       script. 
         var wsdomain = "!{wsdomain}";
         var delay = !{config.delay};
         var data = !{dd}
+        var buyed = !{buyedbuyed}
 
   body
     nav.navbar.navbar-dark.bg-dark.navbar-expand-lg.sticky-top

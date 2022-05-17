@@ -7,7 +7,7 @@ const config = require('config');
 router.get('/', function(req, res) {
   var date = new Date();
   date.setTime(date.getTime() - (config.delay * 60 * 1000));
-  Data.find({$or:[{createdAt:{"$gte": date}},{status: true}]}).select("-_id -email -updatedAt -__v").exec((err, data) => {
+  Data.find({$or:[{createdAt:{"$gte": date}},{status: "comprato"}]}).select("-_id -email -updatedAt -__v").exec((err, data) => {
     console.log("data get");
     console.log(config.env);
     var send = {}
@@ -23,7 +23,7 @@ router.get('/data', function(req, res) {
     var date = new Date();
     date.setTime(date.getTime() - (config.delay * 60 * 1000));
 
-    Data.find({$or:[{createdAt:{"$gte": date}},{status: true}]}).select("-_id buy_id status").exec((err, data) => {
+    Data.find({$or:[{createdAt:{"$gte": date}},{status: "comprato"}]}).select("-_id buy_id status").exec((err, data) => {
       console.log("data");
       console.log(data);
       res.json(data);
@@ -130,7 +130,7 @@ wss.on('connection', (ws) => {
       });        
     } else if (message.action == 'EXPIREDATA') {
       [...clients.keys()].forEach((client) => {
-        client.send(JSON.stringify({buy_id: message.buy_id}));
+        client.send(JSON.stringify({status: message.status, buy_id: message.buy_id}));
       });
       console.log(message.action)
     }
@@ -148,6 +148,7 @@ wss.on('connection', (ws) => {
 });
 
 wss.on("close", () => {
+  console.log('disconnected');
   clients.delete(ws);
 });
 
@@ -156,10 +157,10 @@ router.post('/', function(req, res) {
   console.log(req.body)
   // PRENOTA
 
-  let tosave = new Data({status: false, buy_id: req.body.buy_id, email: req.body.email});
+  let tosave = new Data({status: "prenotato", buy_id: req.body.buy_id, email: req.body.email});
   tosave.save().then((data) => {
     [...clients.keys()].forEach((client) => {
-      client.send(JSON.stringify({status: false, buy_id: req.body.buy_id}));
+      client.send(JSON.stringify({status: "prenotato", buy_id: req.body.buy_id}));
     });
 
    return res.status(201).json({

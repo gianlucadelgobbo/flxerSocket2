@@ -5,5 +5,5 @@
   "production": {
     "wsdomain": "wss://ted.avnode.net:8060"
   },
-  "delay": 2
+  "delay": 0.3
 }

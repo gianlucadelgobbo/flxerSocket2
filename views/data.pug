@@ -1,6 +1,7 @@
 extends layout
 
 block content
+  
   script. 
     var is_admin = true
   .container
@@ -30,14 +31,17 @@ block content
                 - date2.setTime(date2.getTime() + (config.delay * 60 * 1000));
                 if date2.getTime() > date.getTime()
                   !="BOOKED"
-                else if d.status
+                else if d.status == "comprato"
                   !="SOLD"
-                else if !d.status
+                else if d.status == "prenotato"
                   !="EXPIRED"
               td
-                .form-check
-                  input.form-check-input.adminstatus(data-id=d._id type="checkbox" checked=(d.status ? "" : undefined) data-buy_id=d.buy_id)
-                  label.form-check-label(for=d._id)=" BUYED"
+                if d.status == "comprato" || (d.status == "prenotato" && buyed.indexOf(d.buy_id)===-1)
+                  .form-check
+                    input.form-check-input.adminstatus(data-id=d._id data-time=d.createdAt type="checkbox" checked=(d.status == "comprato" ? "" : undefined) data-buy_id=d.buy_id)
+                    label.form-check-label(for=d._id)=" BUYED"
+                else 
+                  !="BUYED FROM SOMEONE ELSE"
               td=d.createdAt
     else
       p You are currently not logged in. Plaese login or register...

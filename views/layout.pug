@@ -1,7 +1,7 @@
 doctype html
 html(lang='en')
   head
-    title Arturo Tedeschi
+    title GATEWAY
     // Required meta tags
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1')
@@ -23,23 +23,27 @@ html(lang='en')
   body
     nav.navbar.navbar-dark.bg-dark.navbar-expand-lg.sticky-top
       .container-fluid
-        a.navbar-brand Arturo Tedeschi
+        a.navbar-brand GATEWAY
         button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown' aria-controls='navbarNavDropdown' aria-expanded='false' aria-label='Toggle navigation')
           span.navbar-toggler-icon
         #navbarNavDropdown.collapse.navbar-collapse
           ul.navbar-nav
             li.nav-item
-              a.nav-link.active(aria-current='page' href='/') Home
-            if (typeof(user) == 'undefined')
-              li.nav-item
-                a.nav-link(href="/about") About
+              a.nav-link(href='/') GATEWAY
+            li.nav-item
+              a.nav-link(href="/about") ABOUT
+            li.nav-item
+              a.nav-link(href="/nft") NFT
+            li.nav-item
+              a.nav-link(href="/faq") FAQ
+            //-if (typeof(user) == 'undefined')
               li.nav-item
                 a.nav-link(href="/login") Log In
-            else
-              li.nav-item
-                a.nav-link(href="/logout") Log Out
-              li.nav-item
-                a.nav-link(href="/data") DATA
+              else
+                li.nav-item
+                  a.nav-link(href="/logout") Log Out
+                li.nav-item
+                  a.nav-link(href="/data") DATA
 
     block content
     #buyModal.modal.fade(tabindex='-1' aria-labelledby='buyModalLabel' aria-hidden='true')

@@ -19,7 +19,15 @@ router.get('/', function(req, res) {
 });
 
 router.get('/about', function(req, res) {
-  res.render('about', {"data":{}});
+  res.render('about', {"data":{path:"a-at-metawaste.vev.site/untitled-copy", src:"https://js.vev.design/v/gkYJXZVTvZ/895d056/vev.js"}});
+});
+
+router.get('/nft', function(req, res) {
+  res.render('about', {"data":{path:"a-at-metawaste.vev.site/untitled-copy", src:"https://js.vev.design/v/gkYJXZVTvZ/895d056/vev.js"}});
+});
+
+router.get('/faq', function(req, res) {
+  res.render('about', {"data":{path:"a-at-metawaste.vev.site/untitled-copy", src:"https://js.vev.design/v/gkYJXZVTvZ/895d056/vev.js"}});
 });
 
 router.get('/data', function(req, res) {

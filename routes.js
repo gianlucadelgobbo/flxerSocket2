@@ -18,6 +18,10 @@ router.get('/', function(req, res) {
   });
 });
 
+router.get('/about', function(req, res) {
+  res.render('about', {"data":{}});
+});
+
 router.get('/data', function(req, res) {
   if (req.query.json) {
     var date = new Date();

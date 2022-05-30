@@ -24,6 +24,7 @@ function myOnresize() {
 var ws;
 var intervals = {};
 var buyModal;
+var commands = [];
 class interval {
   constructor(buy_id, ms) {
     var i = setInterval(()=>{
@@ -34,7 +35,11 @@ class interval {
       if ($("#nft"+buy_id+" .prenotato").length) {
         const messageBody = { action: "EXPIREDATA", buy_id: buy_id, status: "expired" };
         console.log(messageBody);
-        ws.send(JSON.stringify(messageBody));
+        if (ws.readyState == 1) {
+          ws.send(JSON.stringify(messageBody));
+        } else {
+          commands.push(JSON.stringify(messageBody))
+        }
       }
       clearInterval(i)
     }, ms);
@@ -47,7 +52,6 @@ function setMyInterval(buy_id, ms) {
 function connect() {
   console.log("wsdomain "+wsdomain)
   ws = new WebSocket(''+wsdomain+'/ws');
-
   ws.onmessage = (webSocketMessage) => {
     console.log("onmessage")
     const messageBody = JSON.parse(webSocketMessage.data);
@@ -83,6 +87,12 @@ function connect() {
   };
   ws.onopen = function() {
     console.log('Socket is open.');
+    if (commands.length) {
+      for (let index = 0; index < commands.length; index++) {
+        ws.send(commands[index]); 
+      }
+      commands = [];
+    }
   };
   
   ws.onclose = function(e) {

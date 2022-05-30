@@ -226,12 +226,12 @@ router.post('/', function(req, res) {
   htmlEmail+='	<div>&gt;&gt;&gt; HERE THE INSTRUCTIONS:</div>';
   htmlEmail+='	<ol>';
   htmlEmail+='		<li>';
-  htmlEmail+='			<b>Create a KUKAI Wallet</b> (it will take 2 minutes), you don&#39;t need to buy any crypto (0 balance is fine):<a href="https://wallet.kukai.app/" target="_blank">https://wallet.kukai.app/</a>';
+  htmlEmail+='			<b>Create a KUKAI Wallet</b> (it will take 2 minutes), you don&#39;t need to buy any crypto (0 balance is fine): <a href="https://wallet.kukai.app/" target="_blank">https://wallet.kukai.app/</a>';
   htmlEmail+='			<br/>';
   htmlEmail+='			<font size="1">Kukai is a wallet enabling you to collect NFTs using the Tezos Blockchain.</font>';
   htmlEmail+='		</li>';
   htmlEmail+='		<li>';
-  htmlEmail+='			<b>Share with us your wallet address by replyingto this email</b>, so that we candrop the NFT directly toyour wallet';
+  htmlEmail+='			<b>Share with us your wallet address by replying to this email</b>, so that we can drop the NFT directly to your wallet';
   htmlEmail+='			<br/>(you will see it in the NFT/collectibles section of Kukai)';
   htmlEmail+='		</li>';
   htmlEmail+='	</ol>';

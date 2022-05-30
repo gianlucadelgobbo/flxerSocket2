@@ -6,11 +6,13 @@ block content
     var is_admin = true
   .container
     if (user)
-      h1.mt-3.mb-4 You are currently logged in as #{user}
+      h1.mt-5.pt-3.mb-4 You are currently logged in as #{user}
       table.table
         thead
           tr
-            th Act 
+            - console.log(user)
+            if user=="admin"
+              th Act 
             th NFT 
             th Email 
             th Status 
@@ -19,9 +21,10 @@ block content
         tbody
           each d in data
             tr(id=d._id)
-              td
-                button.btn.btn-danger.admindelete(type='button' data-id=d._id data-buy_id=d.buy_id)
-                  span.btn-close
+              if user=="admin"
+                td
+                  button.btn.btn-danger.admindelete(type='button' data-id=d._id data-buy_id=d.buy_id)
+                    span.btn-close
               td=d.buy_id 
               td
                 a(href="mailto:"+d.email)=d.email 

@@ -2,7 +2,6 @@
 
 body, .btn {
   font-family: "DM Sans", Arial, Helvetica, sans-serif;
-  background-color: #000;
 }
 .buttonfull,.prenotato, .comprato {
   height: 100%;
@@ -54,6 +53,7 @@ body, .btn {
   height: 100vh;
   overflow: scroll;
   padding: 100px;
+  background-color: #000;
   /* background-image: url("/img/bkg.png");
   background-position: -1px 3px;
   background-repeat:repeat-x; */

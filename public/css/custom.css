@@ -2,6 +2,7 @@
 
 body, .btn {
   font-family: "DM Sans", Arial, Helvetica, sans-serif;
+  background-color: #000;
 }
 .buttonfull,.prenotato, .comprato {
   height: 100%;

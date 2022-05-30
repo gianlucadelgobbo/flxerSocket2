@@ -21,7 +21,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/about', function(req, res) {
-  res.render('about', {"data":{path:"a-at-metawaste.vev.site/untitled-copy", src:"https://js.vev.design/v/gkYJXZVTvZ/895d056/vev.js"}});
+  res.render('about', {"data":{path:"a-at-metawaste.vev.site/faq-copy", src:"https://js.vev.design/v/4ZAF-zABJW/6074b01/vev.js"}});
 });
 
 router.get('/nft', function(req, res) {

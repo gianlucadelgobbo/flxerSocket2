@@ -53,7 +53,7 @@ html(lang='en')
             h5#buyModalLabel.modal-title INTERACT AND BOOK
             button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
           .modal-body
-            p!="NFT##<br />ENTER YOUR EMAIL ADDRESS TO INTERACT WITH THE INSTALLATION AND TO BOOK THE SELECTED VOXEL-NFT. ONCE DONE CHECK THE INSTALLATION!"
+            p!="ENTER YOUR EMAIL ADDRESS TO INTERACT WITH THE INSTALLATION AND TO BOOK THE SELECTED VOXEL-NFT. ONCE DONE CHECK THE INSTALLATION!"
             .alert.alert-danger.d-none
             form
               .mb-3
@@ -63,6 +63,8 @@ html(lang='en')
                 label.col-form-label(for='message-text') Email:
                 input#email.form-control(type='text')
                 small="Your email address will be exclusively used by us to send you the instructions to collect the selected NFT. The address will be deleted from our database after the event."
+                p
+                  b="if you don't receive the email check the spam folder"
           .modal-footer
             button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Close
             button.btn.btn-primary#book(type='button') BOOK

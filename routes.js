@@ -309,7 +309,7 @@ router.post('/', function(req, res) {
         console.log("errorerrorerrorerrorerrorerror");
         console.log(error);
         console.log(error.message);
-        errMsg =  req.body.email + " already exists.";
+        errMsg =  "<b>"+req.body.email + "</b> already booked an NFT.";
       } else {
         errMsg = error.message;
       }

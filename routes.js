@@ -308,7 +308,8 @@ router.post('/', function(req, res) {
       if (error.code == 11000) {
         console.log("errorerrorerrorerrorerrorerror");
         console.log(error);
-        errMsg = Object.keys(error.keyValue)[0] + " already exists.";
+        console.log(error.message);
+        errMsg =  req.body.email + " already exists.";
       } else {
         errMsg = error.message;
       }

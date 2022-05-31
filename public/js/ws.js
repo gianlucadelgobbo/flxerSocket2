@@ -187,8 +187,8 @@ $(function() {
       })
       .fail(function(error) {
         console.log( "error" );
-        $("#buyModal .alert").removeClass("d-none").html(error.responseJSON.message)
-        console.log(error)
+        console.log( error );
+        $("#buyModal .alert").removeClass("d-none").html(error.responseJSON && error.responseJSON.message ? error.responseJSON.message : error.toString())
       });
     }
   }

@@ -306,6 +306,8 @@ router.post('/', function(req, res) {
       // Set custom error for unique keys
       let errMsg;
       if (error.code == 11000) {
+        console.log("errorerrorerrorerrorerrorerror");
+        console.log(error);
         errMsg = Object.keys(error.keyValue)[0] + " already exists.";
       } else {
         errMsg = error.message;

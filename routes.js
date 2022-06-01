@@ -234,7 +234,7 @@ router.post('/', function(req, res) {
   htmlEmail+='		<li>';
   htmlEmail+='			<b>Share with us your wallet address by replying to this email</b>, so that we can drop the NFT directly to your wallet';
   htmlEmail+='			<br/>(you will see it in the NFT/collectibles section of Kukai)';
-  htmlEmail+='	    <font size="1">Like every crypto wallet, Kukai has a &quot;wallet address&quot;. Wallet addresses can be shared safely with anyone from whom you want to receive cryptocurrency or NFTs.<br />You can find and copy your address from the top bar, see the picture below:</font>';
+  htmlEmail+='	    <br/><font size="1">Like every crypto wallet, Kukai has a &quot;wallet address&quot;. Wallet addresses can be shared safely with anyone from whom you want to receive cryptocurrency or NFTs.<br />You can find and copy your address from the top bar, see the picture below:</font>';
   htmlEmail+='	';
   htmlEmail+='	    <p><img src="https://ted.avnode.net/img/kukai.jpg" width="562" height="99"></p>';
   htmlEmail+='		</li>';

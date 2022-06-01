@@ -176,13 +176,13 @@ router.post('/', function(req, res) {
   let email = "Ciao,\n"+"your payment to \""+req.body.buy_id+"\" was successful!!!";
   email+= "*Dear visitor, you just crossed the Gateway!*\n";
   email+="You now booked your voxel \""+req.body.buy_id+"\" for 24hours.\n";
-  email+="For every voxel there's an NFT you can easily collect (for free) following\n";
+  email+="The selected voxel is associated with an NFT you can easily collect (for free) by creating a crypto wallet. If you are brave you can do the procedure on your smartphone, but we recommend finalising the procedure on your computer (you have 24hours to complete the wallet creation steps). Crypto wallets are not as mobile-friendly as you might expect. \n";
   email+="simple steps.\n";
   email+="Gateway's NFTs are created using Tezos, one of the cleanest blockchains.\n";
   email+="\n";
   email+=">>> HERE THE INSTRUCTIONS:\n";
   email+="\n";
-  email+="1) *Create a KUKAI Wallet* (it will take 2 minutes), you don't need to buy any crypto (0 balance is fine): https://wallet.kukai.app/\n";
+  email+="1) *Create a KUKAI Wallet* (it will take 2 minutes on your computer), you don't have to buy any crypto (0 balance is fine): https://wallet.kukai.app/\n";
   email+="Kukai is a wallet enabling you to collect NFTs using the Tezos Blockchain.\n";
   email+="\n";
   email+="2) *Share with us your wallet address by replying to this email*, so that we can drop the NFT directly to your wallet\n";
@@ -215,9 +215,9 @@ router.post('/', function(req, res) {
   htmlEmail+='<div style="font-family: Arial, Helvetica, sans-serif">';
   htmlEmail+='	<div><font size="4"><b>Dear visitor, you just crossed the Gateway!</b><br/>You now booked your voxel "'+req.body.buy_id+'" for 24hours.</font></div>';
   htmlEmail+='	<div style="font-size:large">';
-  htmlEmail+='		For every voxel there&#39;s an NFT you can easily collect (for free) following simple steps.';
+  htmlEmail+='		The selected voxel is associated with an NFT you can easily collect (for free) by creating a <b>crypto wallet</b>. If you are brave you can do the procedure on your smartphone, <b>but we recommend finalising the procedure on your computer</b> (you have 24hours to complete the wallet creation steps). <b>Crypto wallets are not as mobile-friendly as you might expect. </b>';
   htmlEmail+='		<br>';
-  htmlEmail+='		Gateway&#39;s NFTs are created using Tezos, one of the cleanest blockchains.';
+  htmlEmail+='		Gateway&#39;s NFTs are created using <b>Tezos</b>, one of the cleanest blockchains.';
   htmlEmail+='	</div>';
   htmlEmail+='	';
   htmlEmail+='	<div>';
@@ -226,7 +226,7 @@ router.post('/', function(req, res) {
   htmlEmail+='	<div>&gt;&gt;&gt; HERE THE INSTRUCTIONS:</div>';
   htmlEmail+='	<ol>';
   htmlEmail+='		<li>';
-  htmlEmail+='			<b>Create a KUKAI Wallet</b> (it will take 2 minutes), you don&#39;t need to buy any crypto (0 balance is fine): <a href="https://wallet.kukai.app/" target="_blank">https://wallet.kukai.app/</a>';
+  htmlEmail+='			<b>Create a KUKAI Wallet</b> (it will take 2 minutes on your computer), you don&#39;t have to buy any crypto (0 balance is fine): <a href="https://wallet.kukai.app/" target="_blank">https://wallet.kukai.app/</a>';
   htmlEmail+='			<br/>';
   htmlEmail+='			<font size="1">Kukai is a wallet enabling you to collect NFTs using the Tezos Blockchain.</font>';
   htmlEmail+='		</li>';

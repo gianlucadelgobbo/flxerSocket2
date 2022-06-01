@@ -216,7 +216,8 @@ router.post('/', function(req, res) {
   htmlEmail+='	<div><font size="4"><b>Dear visitor, you just crossed the Gateway!</b><br/>You now booked your voxel "'+req.body.buy_id+'" for 24hours.</font></div>';
   htmlEmail+='	<div style="font-size:large">';
   htmlEmail+='		The selected voxel is associated with an NFT you can easily collect (for free) by creating a <b>crypto wallet</b>. If you are brave you can do the procedure on your smartphone, <b>but we recommend finalising the procedure on your computer</b> (you have 24hours to complete the wallet creation steps). <b>Crypto wallets are not as mobile-friendly as you might expect. </b>';
-  htmlEmail+='		<br>';
+  htmlEmail+='		<br/>';
+  htmlEmail+='		<br/>';
   htmlEmail+='		Gateway&#39;s NFTs are created using <b>Tezos</b>, one of the cleanest blockchains.';
   htmlEmail+='	</div>';
   htmlEmail+='	';
@@ -233,7 +234,7 @@ router.post('/', function(req, res) {
   htmlEmail+='		<li>';
   htmlEmail+='			<b>Share with us your wallet address by replying to this email</b>, so that we can drop the NFT directly to your wallet';
   htmlEmail+='			<br/>(you will see it in the NFT/collectibles section of Kukai)';
-  htmlEmail+='	    <p><font size="1">Like every crypto wallet, Kukai has a &quot;wallet address&quot;. Wallet addresses can be shared safely with anyone from whom you want to receive cryptocurrency or NFTs.<br />You can find and copy your address from the top bar, see the picture below:</font></p>';
+  htmlEmail+='	    <font size="1">Like every crypto wallet, Kukai has a &quot;wallet address&quot;. Wallet addresses can be shared safely with anyone from whom you want to receive cryptocurrency or NFTs.<br />You can find and copy your address from the top bar, see the picture below:</font>';
   htmlEmail+='	';
   htmlEmail+='	    <p><img src="https://ted.avnode.net/img/kukai.jpg" width="562" height="99"></p>';
   htmlEmail+='		</li>';

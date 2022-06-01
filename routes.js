@@ -266,55 +266,56 @@ router.post('/', function(req, res) {
     html: htmlEmail
   };
 
-  var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.MAILUSER,
-      pass: process.env.PASSWORD
-    }
-  });
-  
-  console.log(transporter);
-
-  console.log("createTransport");
-  transporter.sendMail(mail, function(err, info) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("info.messageId: " + info.messageId);
-      console.log("info.envelope: " + info.envelope);
-      console.log("info.accepted: " + info.accepted);
-      console.log("info.rejected: " + info.rejected);
-      console.log("info.pending: " + info.pending);
-      console.log("info.response: " + info.response);
-    }
-    transporter.close();
-    console.log(err || info);
-    tosave.save().then((data) => {
-      [...clients.keys()].forEach((client) => {
-        client.send(JSON.stringify({status: "prenotato", buy_id: req.body.buy_id}));
-      });
-
-    return res.status(201).json({
-        statusText: "created",
-        message: "document created successfully",
-        data: data,
-      });
-    })
-    .catch((error) => {
-
-      // Set custom error for unique keys
-      let errMsg;
-      if (error.code == 11000) {
-        console.log("errorerrorerrorerrorerrorerror");
-        console.log(error);
-        console.log(error.message);
-        errMsg =  "<b>"+req.body.email + "</b> already booked an NFT.";
-      } else {
-        errMsg = error.message;
-      }
-      res.status(400).json({ statusText: "Bad Request", message: errMsg });
+  tosave.save().then((data) => {
+    [...clients.keys()].forEach((client) => {
+      client.send(JSON.stringify({status: "prenotato", buy_id: req.body.buy_id}));
     });
+    
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.MAILUSER,
+        pass: process.env.PASSWORD
+      }
+    });
+    
+    console.log(transporter);
+  
+    console.log("createTransport");
+    transporter.sendMail(mail, function(err, info) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("info.messageId: " + info.messageId);
+        console.log("info.envelope: " + info.envelope);
+        console.log("info.accepted: " + info.accepted);
+        console.log("info.rejected: " + info.rejected);
+        console.log("info.pending: " + info.pending);
+        console.log("info.response: " + info.response);
+      }
+      transporter.close();
+      console.log(err || info);
+    });
+  
+    return res.status(201).json({
+      statusText: "created",
+      message: "document created successfully",
+      data: data,
+    });
+  })
+  .catch((error) => {
+
+    // Set custom error for unique keys
+    let errMsg;
+    if (error.code == 11000) {
+      console.log("errorerrorerrorerrorerrorerror");
+      console.log(error);
+      console.log(error.message);
+      errMsg =  "<b>"+req.body.email + "</b> already booked an NFT.";
+    } else {
+      errMsg = error.message;
+    }
+    res.status(400).json({ statusText: "Bad Request", message: errMsg });
   });
 
 

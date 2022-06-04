@@ -65,6 +65,7 @@ function connect() {
           $(".buttonfull").click(function(e){
             e.preventDefault()
             $("#nft").html($(this).data("id"))
+            $("#nft").attr("data-id", $(this).data("id"))
             $("#email").val("");
             $("#buyModal .alert").addClass("d-none").html("")
             buyModal.show()
@@ -118,6 +119,7 @@ $(function() {
   $(".buttonfull").click(function(e){
     e.preventDefault()
     $("#nft").html($(this).data("id"))
+    $("#nft").attr("data-id", $(this).data("id"))
     $("#email").val("");
     $("#buyModal .alert").addClass("d-none").html("")
     buyModal.show()
@@ -169,7 +171,7 @@ $(function() {
     document.getElementById("book").onclick = (e) => {
       e.preventDefault()
       $("#buyModal .alert").addClass("d-none").html("")
-      const messageBody = { action: "SETDATA", buy_id: $("#nft").html(), email: $("#email").val() };
+      const messageBody = { action: "SETDATA", buy_id: $("#nft").data("id"), email: $("#email").val() };
       console.log("messageBody")
       console.log(messageBody)
       $.ajax({

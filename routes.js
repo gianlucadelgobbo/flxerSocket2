@@ -305,13 +305,14 @@ router.post('/', function(req, res) {
     });
   })
   .catch((error) => {
+    console.log("errorerrorerrorerrorerrorerror");
+    console.log(error);
+    console.log(error.message);
+    console.log(tosave);
 
     // Set custom error for unique keys
     let errMsg;
     if (error.code == 11000) {
-      console.log("errorerrorerrorerrorerrorerror");
-      console.log(error);
-      console.log(error.message);
       errMsg =  "<b>"+req.body.email + "</b> already booked an NFT.";
     } else {
       errMsg = error.message;

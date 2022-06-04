@@ -58,13 +58,11 @@ function connect() {
     console.log(messageBody)
     console.log("is_admin"+is_admin)
     if (!is_admin) {
-      console.log("stocazzo")
       if (messageBody.status == "expired") {
         console.log("expired")
         //if ( $("#nft"+messageBody.buy_id+" .prenotato").length) {
           $("#nft"+messageBody.buy_id).html('<a class="buttonfull" href="#" data-id="'+messageBody.buy_id+'">'+messageBody.buy_id+'</a>');
           $(".buttonfull").click(function(e){
-            console.log();
             e.preventDefault()
             $("#nft").html($(this).data("id"))
             $("#email").val("");

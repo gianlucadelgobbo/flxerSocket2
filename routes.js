@@ -171,7 +171,7 @@ router.post('/', function(req, res) {
   console.log(req.body)
   // PRENOTA
 
-  let tosave = new Data({status: "prenotato", buy_id: req.body.buy_id, email: req.body.email});
+  let tosave = new Data({status: "prenotato", buy_id: parseInt(req.body.buy_id), email: req.body.email.trim()});
 
   let email = "Ciao,\n"+"your payment to \""+req.body.buy_id+"\" was successful!!!";
   email+= "*Dear visitor, you just crossed the Gateway!*\n";

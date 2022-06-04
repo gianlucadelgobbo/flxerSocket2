@@ -65,7 +65,7 @@ function connect() {
           $(".buttonfull").click(function(e){
             e.preventDefault()
             $("#nft").html($(this).data("id"))
-            $("#nft").attr("data-id", $(this).data("id"))
+            $("#nft").data("id", $(this).data("id"))
             $("#email").val("");
             $("#buyModal .alert").addClass("d-none").html("")
             buyModal.show()
@@ -119,7 +119,7 @@ $(function() {
   $(".buttonfull").click(function(e){
     e.preventDefault()
     $("#nft").html($(this).data("id"))
-    $("#nft").attr("data-id", $(this).data("id"))
+    $("#nft").data("id", $(this).data("id"))
     $("#email").val("");
     $("#buyModal .alert").addClass("d-none").html("")
     buyModal.show()

@@ -10,8 +10,8 @@ router.get('/', function(req, res) {
   var date = new Date();
   date.setTime(date.getTime() - (config.delay * 60 * 1000));
   Data.find({$or:[{createdAt:{"$gte": date}},{status: "comprato"}]}).select("-_id -email -updatedAt -__v").exec((err, data) => {
-    console.log("data get");
-    console.log(config.env);
+    //console.log("data get");
+    //console.log(config.env);
     var send = {}
     data.forEach(item => {
       send[item.buy_id] = item.status;
@@ -38,8 +38,8 @@ router.get('/data', function(req, res) {
     date.setTime(date.getTime() - (config.delay * 60 * 1000));
 
     Data.find({$or:[{createdAt:{"$gte": date}},{status: "comprato"}]}).select("-_id buy_id status").exec((err, data) => {
-      console.log("data");
-      console.log(data);
+      //console.log("data");
+      //console.log(data);
       res.json(data);
       //res.render('data', {"data":data, user: req.session.passport.user});
     });
@@ -117,7 +117,7 @@ wss.on('connection', (ws) => {
   clients.set(ws, metadata);
 
   ws.on('message', (messageAsString) => {
-    console.log(messageAsString)
+    //console.log(messageAsString)
     const message = JSON.parse(messageAsString);
     console.log(message)
     if (message.action == 'GETDATA') {
@@ -139,14 +139,12 @@ wss.on('connection', (ws) => {
       [...clients.keys()].forEach((client) => {
         client.send(JSON.stringify({buy_id: message.buy_id}));
       });
-      console.log(message.action)
       Data.deleteOne({buy_id:message.buy_id}).exec((err) => {
       });        
     } else if (message.action == 'EXPIREDATA') {
       [...clients.keys()].forEach((client) => {
         client.send(JSON.stringify({status: message.status, buy_id: message.buy_id}));
       });
-      console.log(message.action)
     }
 
     /*  const message = JSON.parse(messageAsString);
@@ -280,11 +278,8 @@ router.post('/', function(req, res) {
       }
     });
     
-    console.log(transporter);
-  
-    console.log("createTransport");
     transporter.sendMail(mail, function(err, info) {
-      if (err) {
+      /* if (err) {
         console.log(err);
       } else {
         console.log("info.messageId: " + info.messageId);
@@ -293,9 +288,9 @@ router.post('/', function(req, res) {
         console.log("info.rejected: " + info.rejected);
         console.log("info.pending: " + info.pending);
         console.log("info.response: " + info.response);
-      }
+      } */
       transporter.close();
-      console.log(err || info);
+      //console.log(err || info);
     });
   
     return res.status(201).json({
@@ -306,7 +301,6 @@ router.post('/', function(req, res) {
   })
   .catch((error) => {
     console.log("errorerrorerrorerrorerrorerror");
-    console.log(error);
     console.log(error.message);
     console.log(tosave);
 
@@ -330,7 +324,5 @@ function uuidv4() {
     return v.toString(16);
   });
 }
-
-console.log("wss up");
 
 module.exports = router;

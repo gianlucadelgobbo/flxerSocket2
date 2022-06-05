@@ -1310,16 +1310,7 @@ block content
             else
               a.buttonfull(href='#' data-id=tmp)=tmp
             //-219
-          td#nft13
-            - var tmp='13'
-            if data[tmp] === "prenotato" 
-              .prenotato=tmp
-            else if data[tmp] === "comprato" 
-              .comprato=tmp
-            else
-              a.buttonfull(href='#' data-id=tmp)=tmp
-            //-13
-          td#nft13
+          td#nft13(colspan="2")
             - var tmp='13'
             if data[tmp] === "prenotato" 
               .prenotato=tmp
